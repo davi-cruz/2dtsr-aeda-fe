@@ -1,1 +1,1 @@
-# Sample Strealit app 
+# Sample Streamlit app 
