@@ -9,10 +9,6 @@ import re
 
 warnings.filterwarnings('ignore')
 
-# Define função para exibir output in formato Markdown
-def printmd(string):
-    st.markdown(string)
-
 # Define as configurações de exibição
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_colwidth', None)
@@ -37,24 +33,21 @@ def main():
     st.markdown('### Lista primeiras linhas do df_governo')
     st.dataframe(df_governo.head(3))
 
-    # # %%
-    # printmd("### Tamanho dos datasets:")
-    # printmd(f"- Dataset de consumidor: ~**{df_consumidor.shape[0]}** medicamentos, contendo **{df_consumidor.shape[1]}** colunas")
-    # printmd(f"- Dataset do governo: ~**{df_governo.shape[0]}** medicamentos, contendo **{df_governo.shape[1]}** colunas")
+    st.markdown("### Tamanho dos datasets:")
+    st.markdown(f"- Dataset de consumidor: ~**{df_consumidor.shape[0]}** medicamentos, contendo **{df_consumidor.shape[1]}** colunas")
+    st.markdown(f"- Dataset do governo: ~**{df_governo.shape[0]}** medicamentos, contendo **{df_governo.shape[1]}** colunas")
 
-    # # %% [markdown]
-    # # **Insights**: Observa-se que o dataset do preços para o governo apresenta uma coluna a mais que o dataset do preço para o consumidor
+    st.markdown('**Insights**: Observa-se que o dataset do preços para o governo apresenta uma coluna a mais que o dataset do preço para o consumidor')
 
-    # # %%
-    # # Verificando os tipos de dados do dataframe consumidor
-    # df_consumidor.info()
+    st.markdown('# Verificando os tipos de dados do dataframe consumidor')
+    st.write(df_consumidor.info())
 
-    # # %%
-    # # Verificando os tipos de dados do dataframe governo
-    # df_governo.info()
+    st.markdown('# Verificando os tipos de dados do dataframe governo')
+    st.write(df_governo.info())
 
-    # # %% [markdown]
-    # # **Insights**: Nota-se que todos os dados foram importados com o tipo object, com exceção dos dados numéricos, corrigidos a partir do uso do parametro de separador decimal, o que sobrescreve o padrão utilizado pelo pandas.
+    st.markdown('**Insights**: Nota-se que todos os dados foram importados com o tipo object, com exceção dos dados numéricos, corrigidos a partir do uso do parametro de separador decimal, o que sobrescreve o padrão utilizado pelo pandas.')
+
+    
 
     # # %% [markdown]
     # # ### Verificando duplicatas
