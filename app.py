@@ -25,14 +25,17 @@ def main():
     df_governo = pd.read_csv('TA_PRECO_MEDICAMENTO_GOV.CSV', sep=';', encoding='ISO-8859-1', decimal=",")
 
     st.markdown("**Insights**: Uma vez que durante a análise pré-importação dos dados era sabido que os valores numericos utilizavam a vírgula como separador decimal, ajustado item durante importação no dataframe para simplificar, utilizando o parametro 'decimal=","', assim como o encoding 'ISO-8859-1` foi utilizado devido à acentuação e caracteres latinos.")
-    st.markdown('```python\n# Importa data sources\ndf_consumidor = pd.read_csv("TA_PRECO_MEDICAMENTO.CSV", sep=";", encoding="ISO-8859-1", decimal=",")\ndf_governo = pd.read_csv("TA_PRECO_MEDICAMENTO_GOV.CSV", sep=";", encoding="ISO-8859-1", decimal=",")")
+    code = '''# Importa data sources
+    df_consumidor = pd.read_csv('TA_PRECO_MEDICAMENTO.CSV', sep=';', encoding='ISO-8859-1', decimal=',')
+    df_governo = pd.read_csv('TA_PRECO_MEDICAMENTO_GOV.CSV', sep=';', encoding='ISO-8859-1', decimal=',')
+    '''
+    st.code(code, language='python')    
 
     st.markdown('### Lista primeiras linhas do df_consumidor')
     st.dataframe(df_consumidor.head(3))
 
-    # # %%
-    # # Lista primeiras linhas do df_governo
-    # df_governo.head(3)
+    st.markdown('### Lista primeiras linhas do df_governo')
+    st.dataframe(df_governo.head(3))
 
     # # %%
     # printmd("### Tamanho dos datasets:")
