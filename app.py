@@ -42,8 +42,8 @@ def main():
     st.markdown('# 2DTSR - Advanced EDA - Atividade')
         
     # Importa data sources
-    df_consumidor = pd.read_csv('TA_PRECO_MEDICAMENTO.CSV', sep=';', encoding='ISO-8859-1', decimal=",")
-    df_governo = pd.read_csv('TA_PRECO_MEDICAMENTO_GOV.CSV', sep=';', encoding='ISO-8859-1', decimal=",")
+    df_consumidor = pd.read_csv('https://raw.githubusercontent.com/davi-cruz/fiap-2dtsr-aeda-fe/main/TA_PRECO_MEDICAMENTO.csv?token=GHSAT0AAAAAAB7KTXDT3PBLXBWOJRWECFAGZB6FUFQ', sep=';', encoding='ISO-8859-1', decimal=",")
+    df_governo = pd.read_csv('https://raw.githubusercontent.com/davi-cruz/fiap-2dtsr-aeda-fe/main/TA_PRECO_MEDICAMENTO_GOV.CSV?token=GHSAT0AAAAAAB7KTXDT26XLMQKEXH6DQEU4ZB6FU3Q', sep=';', encoding='ISO-8859-1', decimal=",")
 
     st.markdown('''**Insights**: Uma vez que durante a análise pré-importação dos dados era sabido que os valores numericos utilizavam a vírgula como separador decimal, ajustado item durante importação no dataframe para simplificar, utilizando o parametro `decimal=","`, assim como o encoding `ISO-8859-1` foi utilizado devido à acentuação e caracteres latinos.''')
 
