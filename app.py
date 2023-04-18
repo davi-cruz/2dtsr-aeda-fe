@@ -300,162 +300,157 @@ for col in factor_columns:
     st.markdown('### Custo dos medicamentos')
 
     
-    # # Prepara um dataframe apenas com as variáveis numéricas
-    # numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
-    # dfNumeric = df_conjunto.select_dtypes(include=numerics)
+    # Prepara um dataframe apenas com as variáveis numéricas
+    numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
+    dfNumeric = df_conjunto.select_dtypes(include=numerics)
 
-    # # %%
-    # # Estatísticas das variáveis numéricas
-    # stats = dfNumeric.describe().T
-    # stats['skew'] = dfNumeric.skew()
-    # stats['mode'] = dfNumeric.mode().iloc[0]
-    # stats['kurtosis'] = dfNumeric.kurtosis()
-    # stats['iqr'] = stats['75%'] - stats['25%']
-    # stats['variance'] = dfNumeric.var()
-    # stats
+    st.markdown('### Estatísticas das variáveis numéricas')
+    stats = dfNumeric.describe().T
+    stats['skew'] = dfNumeric.skew()
+    stats['mode'] = dfNumeric.mode().iloc[0]
+    stats['kurtosis'] = dfNumeric.kurtosis()
+    stats['iqr'] = stats['75%'] - stats['25%']
+    stats['variance'] = dfNumeric.var()
+    st.dataframe(stats)
 
-    # # %% [markdown]
-    # # **Insights**:
-    # # - Analisando as estatísticas, observa-se que os valores dos produtos estão altamente concentrados nos valores mais baixos, com diversos outliers para os valores mais altos. 
+    st.markdown('**Insights**:')
+    st.markdown('- Analisando as estatísticas, observa-se que os valores dos produtos estão altamente concentrados nos valores mais baixos, com diversos outliers para os valores mais altos. ')
 
-    # # %%
-    # # Top 5 medicamentos mais caros e suas respectivas classes terapeuticas
-    # df_conjunto.sort_values(by='PF Sem Impostos', ascending=False).head(5)[['PRODUTO', 'CLASSE TERAPÊUTICA', 'PF Sem Impostos']]
+    st.markdown('### Top 5 medicamentos mais caros e suas respectivas classes terapeuticas')
+    st.dataframe(df_conjunto.sort_values(by='PF Sem Impostos', ascending=False).head(5)[['PRODUTO', 'CLASSE TERAPÊUTICA', 'PF Sem Impostos']])
 
-    # # %%
-    # # Top 5 medicamentos mais baratos e suas respectivas classes terapeuticas
-    # df_conjunto.sort_values(by='PF Sem Impostos', ascending=True).head(5)[['PRODUTO', 'CLASSE TERAPÊUTICA', 'PF Sem Impostos']]
+    st.markdown('### Top 5 medicamentos mais baratos e suas respectivas classes terapeuticas')
+    st.dataframe(df_conjunto.sort_values(by='PF Sem Impostos', ascending=True).head(5)[['PRODUTO', 'CLASSE TERAPÊUTICA', 'PF Sem Impostos']])
 
-    # # %%
+    st.markdown('### Distribuição dos preços dos medicamentos')
     # # Boxplot da distribuição dos preços dos medicamentos
-    # sns.boxplot(data=df_conjunto, x='PF Sem Impostos')
-    # plt.suptitle('Distribuição dos preços dos medicamentos', fontsize=16)
-    # plt.show()
+    fig = plt.figure(figsize=(10, 6))
+    sns.boxplot(data=df_conjunto, x='PF Sem Impostos')
+    plt.suptitle('Distribuição dos preços dos medicamentos', fontsize=16)
+    plt.show()
+    st.pyplot(fig)
 
-    # # %%
-    # # Top 10 classes terapeuticas com maior quantidade de medicamentos
-    # df_conjunto['CLASSE TERAPÊUTICA'].value_counts().head(10).plot(kind='barh')
-    # plt.suptitle('Top 10 classes terapeuticas com maior quantidade de medicamentos', fontsize=16)
+    st.markdown('### Top 10 classes terapeuticas com maior quantidade de medicamentos')
+    fig = plt.figure(figsize=(10, 6))
+    df_conjunto['CLASSE TERAPÊUTICA'].value_counts().head(10).plot(kind='barh')
+    plt.suptitle('Top 10 classes terapeuticas com maior quantidade de medicamentos', fontsize=16)
+    plt.show()
+    st.pyplot(fig)
 
-    # # %%
-    # # Top 10 fabricantes com maior quantidade de medicamentos
-    # df_conjunto['LABORATÓRIO'].value_counts().head(10).plot(kind='barh')
-    # plt.suptitle('Top 10 fabricantes com maior quantidade de medicamentos', fontsize=16)
+    st.markdown('### Top 10 fabricantes com maior quantidade de medicamentos')
+    fig = plt.figure(figsize=(10, 6))
+    df_conjunto['LABORATÓRIO'].value_counts().head(10).plot(kind='barh')
+    plt.suptitle('Top 10 fabricantes com maior quantidade de medicamentos', fontsize=16)
+    plt.show()
+    st.pyplot(fig)
 
-    # # %%
-    # # Total de medicamentos por tipo de produto
-    # df_conjunto['TIPO DE PRODUTO (STATUS DO PRODUTO)'].value_counts().plot(kind='barh')
-    # plt.suptitle('Total de medicamentos por tipo de produto', fontsize=16)
+    st.markdown('### Total de medicamentos por tipo de produto')
+    fig = plt.figure(figsize=(10, 6))
+    df_conjunto['TIPO DE PRODUTO (STATUS DO PRODUTO)'].value_counts().plot(kind='barh')
+    plt.suptitle('Total de medicamentos por tipo de produto', fontsize=16)
+    plt.show()
+    st.pyplot(fig)
 
-    # # %%
-    # # Total de medicamentos por Tarja
-    # df_conjunto['TARJA'].value_counts().plot(kind='barh')
-    # plt.suptitle('Total de medicamentos por Tarja', fontsize=16)
+    st.markdown('### Total de medicamentos por Tarja')
+    fig = plt.figure(figsize=(10, 6))
+    df_conjunto['TARJA'].value_counts().plot(kind='barh')
+    plt.suptitle('Total de medicamentos por Tarja', fontsize=16)
+    plt.show()
+    st.pyplot(fig)
 
-    # # %%
-    # # Seleciona features categóricas 
-    # dfCategorical = df_conjunto.select_dtypes(include=['object', 'category'])
-    # dfCategorical.describe(include=['object', 'category']).T
+    st.markdown('### Estatísticas das features categóricas')
+    dfCategorical = df_conjunto.select_dtypes(include=['object', 'category'])
+    st.dataframe(dfCategorical.describe(include=['object', 'category']).T)
 
-    # # %% [markdown]
-    # # ### Correlações entre variáveis numéricas
+    st.markdown('### Correlações entre variáveis numéricas')
 
-    # # %%
-    # # Análise de correlação entre as variáveis
-    # corr = dfNumeric.corr()
-    # matrix = np.triu(corr)
-    # plt.figure(figsize=(10,6))
-    # ax = sns.heatmap(corr, mask=matrix, annot=True, fmt='.2f', square=True)
-    # ax.set(xlabel="", ylabel="")
-    # ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-    # plt.show()
+    st.markdown('### Análise de correlação entre as variáveis')
+    corr = dfNumeric.corr()
+    matrix = np.triu(corr)
+    fig = plt.figure(figsize=(10,6))
+    ax = sns.heatmap(corr, mask=matrix, annot=True, fmt='.2f', square=True)
+    ax.set(xlabel="", ylabel="")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+    plt.show()
+    st.pyplot(fig)
 
-    # # %% [markdown]
-    # # **Insights**:
-    # # - Conforme já sabido, uma vez que as variáveis numéricas são todas derivadas do `PF Sem Impostos`, todas as variaveis apresentam alta correlação entre si.
+    st.markdown('**Insights**:')
+    st.markdown('- Conforme já sabido, uma vez que as variáveis numéricas são todas derivadas do `PF Sem Impostos`, todas as variaveis apresentam alta correlação entre si.')
+    
+    st.markdown('### Agrupar por "PRODUTO" e combinar "SUBSTÂNCIA"s relacionadas em uma lista')
+    produtos_substancias = df_conjunto.groupby('PRODUTO')['SUBSTÂNCIA'].apply(list).reset_index()
+    st.dataframe(produtos_substancias.head())
 
-    # # %% [markdown]
-    # # ## Análise multivariada
+    st.markdown('### Contar a frequência de ocorrência de cada substância')
+    substancias_freq = df_conjunto['SUBSTÂNCIA'].value_counts().reset_index()
+    substancias_freq.columns = ['SUBSTÂNCIA', 'FREQUÊNCIA']
+    # Calcular o número de substâncias por produto
+    produtos_substancias['NUM_SUBSTÂNCIAS'] = produtos_substancias['SUBSTÂNCIA'].apply(lambda x: len(x))
 
-    # # %%
-    # # Agrupar por "PRODUTO" e combinar "SUBSTÂNCIA"s relacionadas em uma lista
-    # produtos_substancias = df_conjunto.groupby('PRODUTO')['SUBSTÂNCIA'].apply(list).reset_index()
-    # produtos_substancias.head()
+    st.dataframe(produtos_substancias.head())
+    
+    st.markdown('### Distribuição do número de substâncias por produto')
+    st.dataframe(produtos_substancias['NUM_SUBSTÂNCIAS'].describe())
 
-    # # %%
-    # # Contar a frequência de ocorrência de cada substância
-    # substancias_freq = df_conjunto['SUBSTÂNCIA'].value_counts().reset_index()
-    # substancias_freq.columns = ['SUBSTÂNCIA', 'FREQUÊNCIA']
+    fig = plt.figure(figsize=(10, 6))
+    plt.hist(produtos_substancias['NUM_SUBSTÂNCIAS'], bins=20)
+    plt.xlabel('Número de Substâncias')
+    plt.ylabel('Frequência')
+    plt.title('Distribuição do Número de Substâncias por Produto')
+    plt.show()
+    st.pyplot(fig)
 
-    # # %%
-    # # Calcular o número de substâncias por produto
-    # produtos_substancias['NUM_SUBSTÂNCIAS'] = produtos_substancias['SUBSTÂNCIA'].apply(lambda x: len(x))
+    st.markdown('### Boxplot do Número de Substâncias por Produto')
+    fig = plt.figure(figsize=(10, 6))
+    sns.boxplot(x=produtos_substancias['NUM_SUBSTÂNCIAS'])
+    plt.xlabel('Número de Substâncias')
+    plt.title('Boxplot do Número de Substâncias por Produto')
+    plt.show()
+    st.pyplot(fig)
 
-    # # %%
-    # produtos_substancias.head()
+    st.markdown('**Insights**:')
+    st.markdown('- Embora a grande maioria dos medicamentos possuam apenas uma substancia, existem diversos produtos que são compostos da associação de múltiplos princípios ativos, conforme pode ser visto a partir da análise')
+    st.markdown('- A mesma informação pode ser confirmada a partir do boxplot apresentado')
 
-    # # %%
-    # produtos_substancias['NUM_SUBSTÂNCIAS'].describe()
+    st.markdown('### Encontre as 10 substâncias mais frequentes')
+    top_10_substancias = pd.DataFrame(df_conjunto['SUBSTÂNCIA'].value_counts().nlargest(10))
+    st.dataframe(top_10_substancias)
 
-    # # %%
-    # plt.hist(produtos_substancias['NUM_SUBSTÂNCIAS'], bins=20)
-    # plt.xlabel('Número de Substâncias')
-    # plt.ylabel('Frequência')
-    # plt.title('Distribuição do Número de Substâncias por Produto')
-    # plt.show()
+    st.markdown('### Agrupando os dados por laboratório')
+    laboratorio_groups = df_conjunto.groupby('LABORATÓRIO')
 
-    # # %%
-    # sns.boxplot(x=produtos_substancias['NUM_SUBSTÂNCIAS'])
-    # plt.xlabel('Número de Substâncias')
-    # plt.title('Boxplot do Número de Substâncias por Produto')
-    # plt.show()
+    st.markdown('### Calculando as estatísticas dos preços de fábrica (PF) e dos preços ao consumidor (PMC) para cada laboratório')
+    laboratorio_stats = laboratorio_groups.agg({
+        'PF Sem Impostos': ['mean', 'median', 'min', 'max'],
+        'PMC 0%': ['mean', 'median', 'min', 'max']
+    })
 
-    # # %% [markdown]
-    # # **Insights**:
-    # # - Embora a grande maioria dos medicamentos possuam apenas uma substancia, existem diversos produtos que são compostos da associação de múltiplos princípios ativos, conforme pode ser visto a partir da análise
-    # # - A mesma informação pode ser confirmada a partir do boxplot apresentado
+    # Renomeando as colunas para facilitar a leitura
+    laboratorio_stats.columns = ['_'.join(col).strip() for col in laboratorio_stats.columns.values]
 
-    # # %%
-    # # Encontre as 10 substâncias mais frequentes
-    # top_10_substancias = pd.DataFrame(df_conjunto['SUBSTÂNCIA'].value_counts().nlargest(10))
-    # top_10_substancias
+    # Resetando o índice
+    laboratorio_stats.reset_index(inplace=True)
 
-    # # %%
-    # # Agrupando os dados por laboratório
-    # laboratorio_groups = df_conjunto.groupby('LABORATÓRIO')
-
-    # # Calculando as estatísticas dos preços de fábrica (PF) e dos preços ao consumidor (PMC) para cada laboratório
-    # laboratorio_stats = laboratorio_groups.agg({
-    #     'PF Sem Impostos': ['mean', 'median', 'min', 'max'],
-    #     'PMC 0%': ['mean', 'median', 'min', 'max']
-    # })
-
-    # # Renomeando as colunas para facilitar a leitura
-    # laboratorio_stats.columns = ['_'.join(col).strip() for col in laboratorio_stats.columns.values]
-
-    # # Resetando o índice
-    # laboratorio_stats.reset_index(inplace=True)
-
-    st.markdown('# Visualizando as estatísticas por laboratório')
-    #st.dataframe(pd.DataFrame(laboratorio_stats.head()))
+    st.markdown('### Visualizando as estatísticas por laboratório')
+    st.dataframe(pd.DataFrame(laboratorio_stats.head()))
 
     
-    st.markdown('# Identificando laboratórios com preços significativamente diferentes da média do mercado para essa substância')
+    st.markdown('### Identificando laboratórios com preços significativamente diferentes da média do mercado para essa substância')
     mean_pf = df_conjunto['PF Sem Impostos'].mean()
     std_pf = df_conjunto['PF Sem Impostos'].std()
     #Definindo um limiar arbitrário (2 desvios-padrão)
     threshold = 2 * std_pf
 
-    st.markdown('# Encontrando laboratórios com preços médios significativamente diferentes da média do mercado')
-    # outliers = laboratorio_stats[(laboratorio_stats['PF Sem Impostos_mean'] < mean_pf - threshold) | (laboratorio_stats['PF Sem Impostos_mean'] > mean_pf + threshold)]
+    st.markdown('### Encontrando laboratórios com preços médios significativamente diferentes da média do mercado')
+    outliers = laboratorio_stats[(laboratorio_stats['PF Sem Impostos_mean'] < mean_pf - threshold) | (laboratorio_stats['PF Sem Impostos_mean'] > mean_pf + threshold)]
     st.markdown('### Laboratórios com preços significativamente diferentes da média do mercado:"')
-    #st.dataframe(outliers)
+    st.dataframe(outliers)
 
 
     st.markdown('**Insights**:')
     st.markdown('- Laboratório `NOVARTIS BIOCIENCIAS S.A` pratica preços diferentes do mercado, porém análise mais detalhada pode ser importante para identificar o motivo.')
 
-    st.markdown('#Aprofundarmento no laboratório NOVARTIS BIOCIENCIAS S.A')
+    st.markdown('### Aprofundarmento no laboratório NOVARTIS BIOCIENCIAS S.A')
     novartis_produtos = df_conjunto[df_conjunto['LABORATÓRIO'] == 'NOVARTIS BIOCIENCIAS S.A']
     st.dataframe(novartis_produtos[['PRODUTO', 'SUBSTÂNCIA', 'PF Sem Impostos', 'PMC 0%']])
 
